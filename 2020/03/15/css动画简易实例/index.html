@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="css简易动画实例平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码">
+<meta name="description" content="css简易动画实例平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目 为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网页设计上手练习">
 <meta property="og:url" content="http://yoursite.com/2020/03/15/css%E5%8A%A8%E7%94%BB%E7%AE%80%E6%98%93%E5%AE%9E%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="css简易动画实例平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码">
+<meta property="og:description" content="css简易动画实例平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目 为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/image/%E5%9B%BE%E5%83%8F1.png">
 <meta property="og:image" content="http://yoursite.com/image/%E5%9B%BE%E5%83%8F2.png">
@@ -326,9 +326,53 @@
       
 
       
-        <h2 id="css简易动画实例"><a href="#css简易动画实例" class="headerlink" title="css简易动画实例"></a>css简易动画实例</h2><p>平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目<br>为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码</p>
+        <h2 id="css简易动画实例"><a href="#css简易动画实例" class="headerlink" title="css简易动画实例"></a>css简易动画实例</h2><p>平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目
+为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码</p>
 <a id="more"></a>
-<p>效果图如下<br>未开始动画<br><img src="/../image/图像1.png"><br>动画结束后<br><img src="/../image/图像2.png"><br>动画效果可以通过@keyframes来设置<br>本实例具体有关动画代码如下：<br>@keyframes mousedown {<br>        0%{width:200px;<br>    height:35px;<br>    border:1px solid #000000;<br>    margin-top: 30px;<br>    margin-left:200px;<br>    background-color:#000000;<br>    }<br>    95%{width:310px;<br>    height:35px;<br>    border:1px solid rgba(13,12,12,0.79);<br>    margin-top: 30px;<br>    margin-left:145px;<br>    background-color:#00000;<br>    border-radius: 30px;<br>    }<br>    100%{<br>        width:311px;<br>    height:35px;<br>    border:1px solid #000000;<br>    margin-top: 30px;<br>    margin-left:146px;<br>    background-color:rgba(255,255,255,1.00);<br>        border-radius:31px;<br>    }<br>    其中可以通过百分比代码来调节具体动画效果<br>在动画代码设置完成后可以在css中对其引用，以本次网页设计为例，具体引用代码如下：<br>.username:hover {<br>    animation: mousedown 0.5s;<br>    animation-fill-mode: forwards;<br>}<br>.password:hover {<br>    animation: mousedownm 0.5s;<br>    animation-fill-mode: forwards;<br>}<br>可以通过animation来引用具体动画，animation的具体参数为animation: /<em>引用动画名称</em>/ /<em>动画播放时间</em>/;<br>而animation-fill-mode则可控制动画播放完后是否继续保持该状态 forwards则是代表继续保持状态<br>也可自行添加ananimation-iteration-count: /<em>动画循环次数</em>/;来决定动画的循环次数参数中infinite则代表会一直循环</p>
+<p>效果图如下
+未开始动画
+<img src="/../image/图像1.png">
+动画结束后
+<img src="/../image/图像2.png">
+动画效果可以通过@keyframes来设置
+本实例具体有关动画代码如下：
+@keyframes mousedown {
+        0%{width:200px;
+    height:35px;
+    border:1px solid #000000;
+    margin-top: 30px;
+    margin-left:200px;
+    background-color:#000000;
+    }<br>    95%{width:310px;
+    height:35px;
+    border:1px solid rgba(13,12,12,0.79);
+    margin-top: 30px;
+    margin-left:145px;
+    background-color:#00000;
+    border-radius: 30px;
+    }
+    100%{
+        width:311px;
+    height:35px;
+    border:1px solid #000000;
+    margin-top: 30px;
+    margin-left:146px;
+    background-color:rgba(255,255,255,1.00);
+        border-radius:31px;
+    }
+    其中可以通过百分比代码来调节具体动画效果
+在动画代码设置完成后可以在css中对其引用，以本次网页设计为例，具体引用代码如下：
+.username:hover {
+    animation: mousedown 0.5s;
+    animation-fill-mode: forwards;
+}
+.password:hover {
+    animation: mousedownm 0.5s;
+    animation-fill-mode: forwards;
+}
+可以通过animation来引用具体动画，animation的具体参数为animation: /<em>引用动画名称</em>/ /<em>动画播放时间</em>/;
+而animation-fill-mode则可控制动画播放完后是否继续保持该状态 forwards则是代表继续保持状态
+也可自行添加ananimation-iteration-count: /<em>动画循环次数</em>/;来决定动画的循环次数参数中infinite则代表会一直循环</p>
 
       
     </div>
@@ -454,7 +498,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -476,7 +520,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

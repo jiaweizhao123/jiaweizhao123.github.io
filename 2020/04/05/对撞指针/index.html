@@ -368,8 +368,60 @@
       
 
       
-        <h2 id="对撞指针"><a href="#对撞指针" class="headerlink" title="  对撞指针"></a>  对撞指针</h2><p>在一些算法问题中一个好的算法往往能大大地提高程序运行的效率，例如在leetcode题库中便有这么一道题求某一维数组中元素之和为零的三个数组元素，解决这个问题可以使用多个方法，往往在人们看来暴力破解是最简单的方法，但在实际应用过程中暴力破解会大大减慢程序运行的效率，而对撞指针则能较为高效率地解决这一难题。<br>  <a id="more"></a><br>  原题如下：<br>  <img src="/../image/对撞指针习题.png"><br>对于该题中对撞指针的应用思路是先将结果看作三部分（left、mid、right），两侧的指针按照条件筛选依次向中间靠近，而中 间元素的选择也会慢慢增加，这样就可以将所有的情况都试一遍。因此首先先定义left、right两个指针，由于需要储存上一次符合条件的情况进行对比以免出现重复，因此也要创建三个对应类型的变量储存三个值(post_1、post_2、post_3),同时为了算法的正常使用初始数组也要进行按顺序的排列。</p>
-<p>在准备好特殊变量的定义及数组按顺序排列后便可进入循环来判定是否符合要求，并根据情况让left、right及时左右移动，整个就类似于左右靠近最后碰撞的情况。<br>源码及各步骤解释如下：<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>int compar(const void *a,const void *b) //qsort排序函数中指针型排序参数<br>{<br>    return *(int *)a- *(int *)b;<br>}<br>int main(){<br>int a[11]={-1,-2,-5,3,-4,6,-8,7,9,11,-4};<br>qsort(a,11,sizeof(int),compar); //将初始数组按从大到小顺序排序<br>int size=sizeof(a)/sizeof(int);<br>int left=0; //初始化左标<br>int sum[12][3]; //初始化储存结果的数组<br>int right=size-1; //初始化右标<br>int post_1=-1,post_2=-1,post_3=-1; //定义储存之前符合条件的值的”容器”<br>int m=0;<br>for(int i=1;i&lt;size-1;i++){<br>    if(a[i]!=a[i-1]) //若此时数组元素与前一个元素相等则不对其左右标初始化，以保证不会出现重复及缩短运算时间<br>    {<br>        left=0;<br>        right=size-1;<br>    }<br>    while(left&lt;i&amp;&amp;right&gt;i){<br>        if(a[left]&gt;0){ //若最开始左标大于0则三者和不可能等于0（直接退出循环）<br>            break;<br>        }<br>        else if(a[left]+a[i]+a[right]&gt;0){ //若三数和大于0，则右标左移（对应值减小）<br>            right–;<br>        }<br>        else if(a[left]+a[i]+a[right]&lt;0){ //若三数和小于0，则左标右移（对应值增大）<br>            left++;<br>        }<br>        else<br>        {<br>            if(!(a[left]==post_1&amp;&amp;a[i]==post_2&amp;&amp;a[right]==post_3)){ //判断等于0时三数是否与之前有重复<br>                sum[m][0]=a[left];<br>                sum[m][1]=a[i];<br>                sum[m][2]=a[right];<br>                m++;<br>                post_1=a[left];<br>                post_2=a[i];<br>                post_3=a[right];<br>                printf(“%d %d %d\n”,a[left],a[i],a[right]);<br>            }<br>            left++; //默认右移左标推动循环<br>        }<br>    }<br>}<br>} </p>
+        <h2 id="对撞指针"><a href="#对撞指针" class="headerlink" title="  对撞指针"></a>  对撞指针</h2><p>在一些算法问题中一个好的算法往往能大大地提高程序运行的效率，例如在leetcode题库中便有这么一道题求某一维数组中元素之和为零的三个数组元素，解决这个问题可以使用多个方法，往往在人们看来暴力破解是最简单的方法，但在实际应用过程中暴力破解会大大减慢程序运行的效率，而对撞指针则能较为高效率地解决这一难题。
+  <a id="more"></a>
+  原题如下：
+  <img src="/../image/对撞指针习题.png">
+对于该题中对撞指针的应用思路是先将结果看作三部分（left、mid、right），两侧的指针按照条件筛选依次向中间靠近，而中 间元素的选择也会慢慢增加，这样就可以将所有的情况都试一遍。因此首先先定义left、right两个指针，由于需要储存上一次符合条件的情况进行对比以免出现重复，因此也要创建三个对应类型的变量储存三个值(post_1、post_2、post_3),同时为了算法的正常使用初始数组也要进行按顺序的排列。</p>
+<p>在准备好特殊变量的定义及数组按顺序排列后便可进入循环来判定是否符合要求，并根据情况让left、right及时左右移动，整个就类似于左右靠近最后碰撞的情况。
+源码及各步骤解释如下：
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int compar(const void *a,const void *b) //qsort排序函数中指针型排序参数 
+{
+    return *(int *)a- *(int *)b;
+}
+int main(){
+int a[11]={-1,-2,-5,3,-4,6,-8,7,9,11,-4};
+qsort(a,11,sizeof(int),compar); //将初始数组按从大到小顺序排序 
+int size=sizeof(a)/sizeof(int); 
+int left=0; //初始化左标 
+int sum[12][3]; //初始化储存结果的数组 
+int right=size-1; //初始化右标 
+int post_1=-1,post_2=-1,post_3=-1; //定义储存之前符合条件的值的”容器” 
+int m=0;<br>for(int i=1;i&lt;size-1;i++){
+    if(a[i]!=a[i-1]) //若此时数组元素与前一个元素相等则不对其左右标初始化，以保证不会出现重复及缩短运算时间 
+    {
+        left=0;
+        right=size-1;
+    }
+    while(left&lt;i&amp;&amp;right&gt;i){
+        if(a[left]&gt;0){ //若最开始左标大于0则三者和不可能等于0（直接退出循环） 
+            break;
+        }
+        else if(a[left]+a[i]+a[right]&gt;0){ //若三数和大于0，则右标左移（对应值减小） 
+            right–;
+        }
+        else if(a[left]+a[i]+a[right]&lt;0){ //若三数和小于0，则左标右移（对应值增大） 
+            left++;
+        }
+        else
+        {
+            if(!(a[left]==post_1&amp;&amp;a[i]==post_2&amp;&amp;a[right]==post_3)){ //判断等于0时三数是否与之前有重复 
+                sum[m][0]=a[left];
+                sum[m][1]=a[i];
+                sum[m][2]=a[right];
+                m++;
+                post_1=a[left];
+                post_2=a[i];
+                post_3=a[right];
+                printf(“%d %d %d\n”,a[left],a[i],a[right]);
+            }
+            left++; //默认右移左标推动循环 
+        }
+    }
+}
+} </p>
 
       
     </div>
@@ -413,6 +465,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/14/%E5%A0%86%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="prev" title="堆栈和队列">
+                堆栈和队列 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -489,7 +545,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -511,7 +567,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
