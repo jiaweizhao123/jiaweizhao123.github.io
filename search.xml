@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Java捕捉异常机制</title>
+    <url>/2020/04/24/Java%E6%8D%95%E6%8D%89%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<p>平常在编写Java程序的时候由于粗心大意或者是对对应知识的不熟悉，我们或多或少的都会碰到一些错误，一般情况下JVM在遇到错误终止程序运行后都会返回对应错误的位置和有关信息，但有时候这些错误会太过繁琐，而Java的错误捕捉机制就能较好的捕捉到对应的错误，并在捕捉到对应错误时进行不同操作，而且不会中断程序运行</p>
+<a id="more"></a>
+<h2 id="一、异常信息的捕捉"><a href="#一、异常信息的捕捉" class="headerlink" title="一、异常信息的捕捉"></a>一、异常信息的捕捉</h2><p>包含异常信息的代码通常包含在try内（否则不能对其进行捕捉，并且在出现错误后还会直接中断程序的运行），在try后面用catch方法对对应的错误进行捕捉，由于catch是一个重载的方法，可以针对不同错误使用不同形参对应捕捉，捕捉后也可在catch内进行单独的操作。</p>
+<h2 id="二、有关异常信息打印"><a href="#二、有关异常信息打印" class="headerlink" title="二、有关异常信息打印"></a>二、有关异常信息打印</h2><p>有关异常信息的打印方法：getMessage（），这个方法会打印出异常信息的类型
+                        printStackTrace()，这个方法会打印出异常信息的位置及原因</p>
+<h2 id="三、异常抛出"><a href="#三、异常抛出" class="headerlink" title="三、异常抛出"></a>三、异常抛出</h2><p>在Java中处理没有捕捉异常的方法中的异常，可以使用throw和throws来抛出异常并由上层来捕捉异常，两者的区别是throw是抛出具体的异常对象，如</p>
+<h3> System.out.println("the continue");</h3>
+这种抛出的对象必须是具体的异常对象，也有形如throw("error")的重载用法，会返回实参中的字符串。而throws则是声明在方法后并且抛出的对象是抽象的异常类，如
+<h3>public static void add() throws Throwable</h3>
+特别注意的是，如果是通过throw抛出自定义异常，方法体必须要加throw声明可能会抛出的异常，并且对应的上层（在本层到最外层之间）引用时必须有一个捕捉异常的try{}catch(){}，若其间有其他方法引用该方法（不是捕捉异常的那个方法）必须要加泡醋和指定自定义对象类throws，否则编译不能通过。
+四、Java异常处理顺序思维导图
+<image src="/image/JAVA异常处理机制.png">
+]]></content>
+      <tags>
+        <tag>-Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网页设计上手练习</title>
+    <url>/2020/03/15/css%E5%8A%A8%E7%94%BB%E7%AE%80%E6%98%93%E5%AE%9E%E4%BE%8B/</url>
+    <content><![CDATA[<h2 id="css简易动画实例"><a href="#css简易动画实例" class="headerlink" title="css简易动画实例"></a>css简易动画实例</h2><p>平时的网页设计练习，可以很好的反应一个人的想法，但只是用静态的效果往往不能很好的大展身手，而适当的加上一些简单容易上手的css动画，无异于锦上添花，更能让个人天马行空的设想变成现实，让独特的样式鹤立鸡群、引人注目
+为了达到这种效果可以通过简单的css代码完成简易的动画，接下来会列举一例有关css动画的实例，并具体解释有关代码</p>
+<a id="more"></a>
+<p>效果图如下
+未开始动画
+<img src="/../image/图像1.png">
+动画结束后
+<img src="/../image/图像2.png">
+动画效果可以通过@keyframes来设置
+本实例具体有关动画代码如下：
+@keyframes mousedown {
+        0%{width:200px;
+    height:35px;
+    border:1px solid #000000;
+    margin-top: 30px;
+    margin-left:200px;
+    background-color:#000000;
+    }<br>    95%{width:310px;
+    height:35px;
+    border:1px solid rgba(13,12,12,0.79);
+    margin-top: 30px;
+    margin-left:145px;
+    background-color:#00000;
+    border-radius: 30px;
+    }
+    100%{
+        width:311px;
+    height:35px;
+    border:1px solid #000000;
+    margin-top: 30px;
+    margin-left:146px;
+    background-color:rgba(255,255,255,1.00);
+        border-radius:31px;
+    }
+    其中可以通过百分比代码来调节具体动画效果
+在动画代码设置完成后可以在css中对其引用，以本次网页设计为例，具体引用代码如下：
+.username:hover {
+    animation: mousedown 0.5s;
+    animation-fill-mode: forwards;
+}
+.password:hover {
+    animation: mousedownm 0.5s;
+    animation-fill-mode: forwards;
+}
+可以通过animation来引用具体动画，animation的具体参数为animation: /<em>引用动画名称</em>/ /<em>动画播放时间</em>/;
+而animation-fill-mode则可控制动画播放完后是否继续保持该状态 forwards则是代表继续保持状态
+也可自行添加ananimation-iteration-count: /<em>动画循环次数</em>/;来决定动画的循环次数参数中infinite则代表会一直循环</p>
+]]></content>
+      <tags>
+        <tag>网页设计</tag>
+        <tag>html</tag>
+        <tag>css</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人网站搭建通知</title>
+    <url>/2020/03/04/%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E9%80%9A%E7%9F%A5/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>servlet有关问题</title>
+    <url>/2020/10/20/servlet%E6%9C%89%E5%85%B3%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>由于个人疏忽，在学习过程中总是丢三落四，导致在实践操作中走了不少弯路，今天恰好在初次尝试jsp中servlet的时候就出现了问题，趁此机会将问题及其解决方法记录下来，供以提醒自己需要时刻小心。</p>
+<a id="more"></a>
+<h1 id="问题的出现"><a href="#问题的出现" class="headerlink" title="问题的出现"></a>问题的出现</h1><p>在jsp中通常是使用MVC设计模式来处理问题的，而MVC设计模式则需要一控制器(controller)将页面(view)及各JavaBean联系处理起来，用于分发各种请求、数据，因此便借助到了servlet技术，在整个体系中servlet充当了一种“指挥灯”的角色，用于分发各种请求、数据，整个初次学习过程是颇为顺畅的，但就在我以为写完了一切的文件开始运行的时候，编译器却报了<h2 style="color:red;">“HTTP状态-500 实例化Servlet类[LoginServlet]异常”</h2>的错误。</p>
+<h1 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h1><p>500的这个问题一般是无法找到该文件造成的，因此我无数遍的翻阅了老师的教学视频，一次次的确认了我的代码无误，又一次次检查文件引用路径，仍然一无所获，就在我绞尽脑汁依然无果的时候，一篇CSDN文章启示了我，文章链接：<a href="https://ask.csdn.net/questions/1080808" target="_blank" rel="noopener">https://ask.csdn.net/questions/1080808</a> ，于是我尝试着按着大佬的方法去改，果不其然问题迎刃而解，于是就赶忙写下该博客记录我的解决方法，其实每次创建servlet文件的时候，编译器会自动将有关该文件的信息写入web.xml中，但由于我一开始创建servlet文件时写在了default包中，在自动写入时只是存入了该servlet名称信息（并未包含所在包名），但由于JavaBean的使用必须要一个明确的package，所以我就索性将default package中的所有文件拷贝至另一命名文件夹中，于是就造成了该问题，在经历了百般折腾后没想到问题答案“得来全不费工夫”，但这一系列尝试也并非无用功，在动手过程中更加了解了servlet的知识，于是我便索性将这一事情写成博客，以警醒自己不要粗心大意！！！！</p>
+<h1 id="有关图片"><a href="#有关图片" class="headerlink" title="有关图片"></a>有关图片</h1><p>出现问题:
+<img src="/../image/servlet问题.png">
+解决方法：
+<img src="/../image/解决方法.png"></p>
+]]></content>
+      <tags>
+        <tag>-jsp -Java -Javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>c语言字符动画</title>
+    <url>/2020/03/26/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E5%8A%A8%E7%94%BB/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>前中后缀表达式关系及求解</title>
+    <url>/2020/09/21/%E2%80%9C%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%B3%E7%B3%BB%E5%8F%8A%E6%B1%82%E8%A7%A3%E2%80%9D/</url>
+    <content><![CDATA[<p>由于个人作风疏散，已经有几个月没能发表博客了，但就在今日数据结构课上时，博主在老师讲过前中后缀表达式问题后竟然还是半知半解，于是竟然发觉已有几个月没认真学习了，于是趁着这次机会好好将此知识点归纳总结。</p>
+<a id="more"></a>
+<h1 id="前中后缀表达式"><a href="#前中后缀表达式" class="headerlink" title="前中后缀表达式"></a>前中后缀表达式</h1><hr>
+<p>在平时进行计算的过程中，我往往使用的都是中缀表达式，形如”1+3/5”，由于平日里的使用，这种表达式为人所熟知，但与此对应的还有这前序表达式（波兰表达式）、后续表达式（逆波兰表达式），分别形如”-AB/C”、”ABC+D-“，由于计算中不常接触到这两种表达式，因此在初次接触时难免会感到陌生和不适应，但总的来说三种表达式只是数学表达式的不同形式而已，其间也存在这密切的联系，并且可以相互转换。</p>
+<h1 id="前中后缀表达式转换"><a href="#前中后缀表达式转换" class="headerlink" title="前中后缀表达式转换"></a>前中后缀表达式转换</h1><hr>
+<h2 id="利用堆栈进行表达式转换"><a href="#利用堆栈进行表达式转换" class="headerlink" title="利用堆栈进行表达式转换"></a>利用堆栈进行表达式转换</h2><h3 id="中缀表达式转前缀表达式"><a href="#中缀表达式转前缀表达式" class="headerlink" title="中缀表达式转前缀表达式"></a>中缀表达式转前缀表达式</h3><p>先创建两个堆栈S1、S2分别储存运算符和中间结果，从右往左遍历，将数字存入S2中，遇到运算符时先与S1栈内顶端运算符进行优先级对比(若栈内为空时则默认入栈)，若此运算符运算优先级大于等于栈顶运算符则入栈，反之则将栈顶运算符压入S2栈内，再将此运算符入栈，若碰到括号时可直接将右括号入栈，括号入栈后优先级最低，待到遍历至左括号时将两括号间的栈内元素全部压入S2，表达式遍历完后将S1内全部元素压入S2，最后依次将S2内元素出栈，便得到了前缀表达式。</p>
+<h3 id="中缀表达式转后缀表达式"><a href="#中缀表达式转后缀表达式" class="headerlink" title="中缀表达式转后缀表达式"></a>中缀表达式转后缀表达式</h3><p>转换原理大体上与上述中缀表达式转前缀表达式相同，需要注意的是在进行运算符优先级对比入栈时，只有大于才能正常入栈，并且最后清空S2栈时需要将所得结果逆序。</p>
+<h2 id="利用二叉树进行表达式转换"><a href="#利用二叉树进行表达式转换" class="headerlink" title="利用二叉树进行表达式转换"></a>利用二叉树进行表达式转换</h2><p>首先要将中缀表达式转换为二叉树储存，在二叉树中叶节点储存运算符，叶子节点中储存运算数，在对原表达式进行处理前可以先给各部分加上括号例如”a+b<em>c+c/b”可以写作”((a+b)</em>c)+(c/b)”，然后依次将个元素插入二叉树中。
+对于二叉树而言，前序遍历法的输出即为前缀表达式，后序遍历法即为后缀表达式，以下为某一例题:
+<img src="/../image/表达式二叉树.png"></p>
+<p>以上只简单的阐述了前中后缀表达式的转换思想，具体实现还是要多下功夫，毕竟“纸上得来终觉浅”，自此往后博主也要改改懒散的毛病了。</p>
+]]></content>
+      <tags>
+        <tag>-数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于c语言算法题解（一）</title>
+    <url>/2020/03/10/%E5%85%B3%E4%BA%8Ec%E8%AF%AD%E8%A8%80%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="字母金字塔问题"><a href="#字母金字塔问题" class="headerlink" title="字母金字塔问题"></a>字母金字塔问题</h2><p>具体题目如下：</p>
+<p>编写一个程序，提示用户输入大写字母。使用嵌套循环以下面金字塔
+型的格式打印字母：
+A
+ABA
+ABCBA
+ABCDCBA
+ABCDEDCBA
+打印这样的图形，要根据用户输入的字母来决定。例如，上面的图形是
+在用户输入E后的打印结果.</p>
+<a id="more"></a>
+
+<p>解题思路：
+·由该题提示由用户输入大写字母来对应“字母金字塔”的层级，可知可以根据ASCII中‘A’和其他字母的差值来判断“字母金字塔”的层级，由此可得代码：char n; int m;scanf(“%c”,&amp;n); m=’A’-n+1;</p>
+<p>·观察整体“字母金字塔”可知由上述m决定了“字母金字塔”的层数，因此提前设置一个每次都会换行的for循环（底部内嵌printf（”\n”）;</p>
+<p>·观察”字母金字塔”可得出规律，字母由’A’正序增长个数由层级决定，例如第三层则字母正序由’A’增长至’c’，增长了三次，因此可以在上述循环内设置一个由m决定的for循环，内嵌输出一个由’A’开始每次都会增长的字符</p>
+<p>观察后续规律可知每次对应字母增长后若不为’A’，都会减少1 ASCII值，随后一次输出对应字母直至’A’，因此在自增循环后在添加一自减循环(需注意应先减1 ASCII值)</p>
+<p>答案：</p>
+<p>由上述分析易知代码如下：
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int m,o;
+    char n;
+    printf(“请输入你所要的层级\n”);
+    scanf(“%c”,&amp;n);
+    m=n-‘A’+1;
+    for(int i=0;i&lt;m;i++)
+    {
+        char s=’A’;
+        for(o=0;o&lt;i+1;o++)
+        {
+           printf(“%c”,s);
+           s=s+1;
+        }
+        s=s-1;
+        for(int u=0;u&lt;i;u++)
+        {
+            s=s-1;
+            printf(“%c”,s);
+        }
+        printf(“\n”);
+    }
+}</p>
+]]></content>
+      <categories>
+        <category>c语言</category>
+      </categories>
+      <tags>
+        <tag>c语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>堆栈和队列</title>
+    <url>/2020/04/14/%E5%A0%86%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<p>这几天初学堆栈和队列，起初没多么在意两者区别，认为所谓有所不同也都是基于在链表使用的基础上的使用，只要记住了堆栈先进后出的存取方式而队列与之相反这想法就可以清楚的分清两者的界限了(正所谓“有端联想” (“ps:自欺欺人”)罢了)，这种可有可无的东西用不着太在意，但今天一看到mooc上的“用两个堆栈来表示队列”的有关题目时就蒙圈了，初看时竟然还天真的想着可以一直由一个堆栈入栈再出栈进入第二个栈，随之出栈就可以轻轻松松的实现“无限循环了”，当看到最后的答案时转过头来才发现自己是多么的天真，知其然却不知其所以然，果然还是要多去了解个所以然才能免得贻笑大方。于是又绞尽脑汁地把前两天看的数据结构的知识点在这做个小结了。</p>
+<a id="more"></a>
+
+<h2 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h2><p>堆栈可以看作一种特殊的储存区，可以在运算时暂存数据，堆栈存取数据的规则是“先进后出FILO”，最先储存的数据储存在栈底，而整个堆栈可以看作一个下闭上开的区间，储存数据是由上方存入的，使用数据时也是由上方先取出，这便是“先进后出FILO”，用某位老师的话讲就好比是叠盘子，用的时候也是从上面拿的。像递归、中缀转后缀表达式等都可以通过堆栈实现。</p>
+<p>堆栈的实现规则：通常堆栈可以由数组或链表来实现，对于数组而言可以让头节点分别位于两端，插入、删除操作都可指定执行，而链表储存的话基于链表的特点，头节点只能位于头部(位于末端的话插入操作可以正常进行，但删除操作执行后头节点就无法继续链接至上个节点了)。</p>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>队列和堆栈一样都可以看作时一种特殊的储存区，队列存取数据的规则是“先进先出”，最先储存的数据可以最先出队，在生成队列会又两个节点表示插入端和删除端(以插入端顺序末尾为头节点)，因此队列在便遍历时可以选择从头或者从尾开始遍历(但不能同时遍历)，因此遍历速度会快于堆栈。</p>
+<h2 id="如何用两个堆栈模拟实现一个队列-如果这两个堆栈的容量分别是m和n（m-gt-n-，你的方法能保证的队列容量是多少？"><a href="#如何用两个堆栈模拟实现一个队列-如果这两个堆栈的容量分别是m和n（m-gt-n-，你的方法能保证的队列容量是多少？" class="headerlink" title="如何用两个堆栈模拟实现一个队列?  如果这两个堆栈的容量分别是m和n（m&gt;n)，你的方法能保证的队列容量是多少？"></a>如何用两个堆栈模拟实现一个队列?  如果这两个堆栈的容量分别是m和n（m&gt;n)，你的方法能保证的队列容量是多少？</h2><p>用容量较小的堆栈作为缓冲区，容量较大的作为储存区，先向储存区压入n个，但由于队列是先进先出，所以再把这n个出栈压进缓冲区，再向储存区压入n+1个，将缓冲区出栈清空后，再将储存区后n个压入缓冲区，此时多余的一个(这n+1个中最先入栈的)会因缓冲区满了直接出栈，接下来再清空缓冲区，这样就可以满足队列先进先出的特点了，因此最大容量为2n+1</p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>课后总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人博客实战及链接</title>
+    <url>/2020/07/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98%E5%8F%8A%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[<h2 id="个人博客创建思路"><a href="#个人博客创建思路" class="headerlink" title="个人博客创建思路"></a>个人博客创建思路</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;自主从学习计科以来就想着能够自己做个人博客，正好本学期网页设计课程的期末大作业就是设计一个属于自己的网站，于是便早早地开始着手准备，整个过程持续了大概两个月。<br>&nbsp;&nbsp;&nbsp;&nbsp;个人博客是一个体现个人个性的网页，于是在一开始的设计规划时便想着极可能的将该博客做的更加个性化，但经过一段时间的苦思冥想仍旧一无所获，对于如何设计布局、开始下手还是毫无思绪，于是在接下来的几天参考了各个大佬的个人博客，最终初步定型了设计样式。</p>
+<a id="more"></a>
+<h2 id="个人博客的设计过程"><a href="#个人博客的设计过程" class="headerlink" title="个人博客的设计过程"></a>个人博客的设计过程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;整个个人博客的设计过程也是历尽坎坷，一开始只是想着自己一个人闷着头去慢慢敲总会有结果的，如此这般忽视了基础的重要性，一味的天马行空导致耗费了大量时间却只能写出一个简略的个人博客，写完后才意识到基础知识的重要性，于是便开始漫长的查找及学习过程，大部分学习资源都是通过b站及w3school得到的，经过了一段时间的学习后再次开始个人博客的设计时便感到更加的得心应手了，一开始不能解决的问题慢慢地就迎刃而解了，例如解决因窗口缩放问题而导致网页整体布局乱序地问题，在一开始的设计过程中百思不得其解，而后来看只是当初一味地追求新颖而使用绝对定位的问题，网页布局使用百分比或者窗口比例大小来设计不然容易理解，但在面对窗口缩放时问题便接踵而来了，网页布局便会随着窗口缩放而变化，原先的布局统统被打乱了，于是在实际体验中这种方法是万万行不通的，有了第一次的沉痛教训之后，在第二次个人博客的设计过程中便开始注意这些小问题了，所谓”兵来将挡，水来土掩”，在设计过程中势必会遇到或多或少的问题，但大多经过了不懈的学习后都慢慢的解决了。<br>&nbsp;&nbsp;&nbsp;&nbsp;整体网页使用了html5、css3，一开始使用Dreamweaver设计，但鉴于个人不适应Dreamweaver，于是转用vscode进行设计，在设计的过程中也使用了b站、csdn、博客园的途径获取有关学习资源。</p>
+<h2 id="学习心得"><a href="#学习心得" class="headerlink" title="学习心得"></a>学习心得</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;”纸上得来终觉浅，得知此事要躬行”，尽管课上认真听讲能够学习并牢牢记住大部分的知识点，但理论若脱离实践的话终究只是一纸空谈无凭无据，适当的实践操作不仅能够强化记忆、查漏补缺，更能通过实践过程中自己动手解决遇到的问题加深对各个知识点的理解，虽然本次个人博客的设计前前后后花费不少时间、走过不少弯路、碰见过或多或少、大大小小的问题，但最后收获颇丰，值得值得！！</p>
+<h2 id="跳转链接"><a href="#跳转链接" class="headerlink" title="跳转链接"></a>跳转链接</h2><p>有关站点已经部署在GitHub的仓库里了，可以直接访问。<br>个人博客：<a href="https://jiaweizhao123.github.io/rushtime.github.io/index.html" target="_blank" rel="noopener">https://jiaweizhao123.github.io/rushtime.github.io/index.html</a><br>课设作业(书香阁)：<a href="https://jiaweizhao123.github.io/bookshouse.github.io/" target="_blank" rel="noopener">https://jiaweizhao123.github.io/bookshouse.github.io/</a></p>
+]]></content>
+      <categories>
+        <category>html</category>
+        <category>css</category>
+        <category>网页设计</category>
+      </categories>
+      <tags>
+        <tag>网页设计</tag>
+        <tag>html</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正整数A+B</title>
+    <url>/2020/10/27/%E6%AD%A3%E6%95%B4%E6%95%B0A-B/</url>
+    <content><![CDATA[<p>&emsp;&emsp;本题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。</p>
+<a id="more"></a>
+<h1>L1-025 正整数A+B</h1><br>
+&emsp;&emsp;题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。
+
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>&emsp;&emsp;输入在一行给出A和B，其间以空格分开。问题是A和B不一定是满足要求的正整数，有时候可能是超出范围的数字、负数、带小数点的实数、甚至是一堆乱码。</p>
+<p>&emsp;&emsp;<point style="color:red;">注意：我们把输入中出现的第1个空格认为是A和B的分隔。题目保证至少存在一个空格，并且B不是一个空字符串。</point></p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>&emsp;&emsp;如果输入的确是两个正整数，则按格式”A + B = “和输出。如果某个输入不合要求，则在相应位置输出”?”，显然此时和也是”?”。</p>
+<h2 id="输入样例1"><a href="#输入样例1" class="headerlink" title="输入样例1"></a>输入样例1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">123 456</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例1"><a href="#输出样例1" class="headerlink" title="输出样例1"></a>输出样例1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">123 + 456 &#x3D; 579</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入样例2"><a href="#输入样例2" class="headerlink" title="输入样例2"></a>输入样例2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">22. 18</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例2"><a href="#输出样例2" class="headerlink" title="输出样例2"></a>输出样例2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">? + 18 &#x3D; ?</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入样例3"><a href="#输入样例3" class="headerlink" title="输入样例3"></a>输入样例3</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-100 blabla bla...33</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例3"><a href="#输出样例3" class="headerlink" title="输出样例3"></a>输出样例3</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">? + ? &#x3D; ?</span><br></pre></td></tr></table></figure>
+
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析:"></a>解析:</h2><p>&emsp;&emsp;本题重点在上方已经用红字重点标注出来了，在输入过程中，<point style="font-weight:700;">不管有几个空格，都是以第一个空格为界限！</point>因此在第一个空格过后都是属于第二个数的数据。</p>
+<h2 id="程序源码"><a href="#程序源码" class="headerlink" title="程序源码"></a>程序源码</h2><p>&emsp;&emsp;该答案中用m、n分别表示第一个数据、第二个数据的字符字符总和，用x、y分别表示第一个数据、第二个数据的数字总和，最后如果m=x,n=y的话则证明两个数据都是正整数，否则就根据不同情况做出判断.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    string a;</span><br><span class="line">    getline(cin,a);</span><br><span class="line">    int m&#x3D;0,n&#x3D;0;</span><br><span class="line">    int x&#x3D;0,y&#x3D;0;</span><br><span class="line">    int i&#x3D;0;</span><br><span class="line">    for(i&#x3D;0;i&lt;a.length();i++)&#123;</span><br><span class="line">        if(a[i]&#x3D;&#x3D;&#39; &#39;) break;</span><br><span class="line">        m&#x3D;m*10+(a[i]-&#39;0&#39;);</span><br><span class="line">        if(a[i]&gt;&#x3D;&#39;0&#39;&amp;&amp;a[i]&lt;&#x3D;&#39;9&#39;)</span><br><span class="line">            x&#x3D;x*10+(a[i]-&#39;0&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int j&#x3D;i+1;j&lt;a.length();j++)&#123;</span><br><span class="line">        n&#x3D;n*10+(a[j]-&#39;0&#39;);</span><br><span class="line">        if(a[j]&gt;&#x3D;&#39;0&#39;&amp;&amp;a[j]&lt;&#x3D;&#39;9&#39;)</span><br><span class="line">            y&#x3D;y*10+(a[j]-&#39;0&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    if(m&lt;&#x3D;1000&amp;&amp;m&gt;&#x3D;1&amp;&amp;(m&#x3D;&#x3D;x))</span><br><span class="line">        cout&lt;&lt;m;</span><br><span class="line">    else    </span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    cout&lt;&lt;&quot; + &quot;;</span><br><span class="line">    if(n&lt;&#x3D;1000&amp;&amp;n&gt;&#x3D;1&amp;&amp;(n&#x3D;&#x3D;y))</span><br><span class="line">        cout&lt;&lt;n;</span><br><span class="line">    else </span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    cout&lt;&lt;&quot; &#x3D; &quot;;</span><br><span class="line">    if(m&lt;&#x3D;1000&amp;&amp;m&gt;&#x3D;1&amp;&amp;(m&#x3D;&#x3D;x)&amp;&amp;n&lt;&#x3D;1000&amp;&amp;n&gt;&#x3D;1&amp;&amp;(n&#x3D;&#x3D;y))</span><br><span class="line">        cout&lt;&lt;m+n;</span><br><span class="line">    else</span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>-程序设计天梯赛 -数据结构与算法 -c++</category>
+      </categories>
+      <tags>
+        <tag>-程序设计天梯赛 -数据结构与算法 -c++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>哈夫曼树的构造</title>
+    <url>/2020/10/21/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0/</url>
+    <content><![CDATA[<p>对于树、二叉树、森林而言，哈夫曼二叉树是一种典型的应用实例，哈夫曼二叉树是一类带权路径长度WPL最短的二叉树，又称最优二叉树。</p>
+<a id="more"></a>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><br>
+<marks style="font-weight:700;">路径及路径长度：</marks>在一棵二叉树中从某一结点k1到另一节点ki之间经过结点的序列k1、k2....ki称为从k1到ki的路径，而该路径经过的度（节点连接线）的数目为路径长度。<br>
+<marks style="font-weight:700;">结点的权值及带权路径长度：</marks>在实际应用中树的结点经常被赋予一个有着某种意义的实数，该实数成为该节点的权值，而结点的权值与路径长度的乘积称为结点的带权路径长度。<br>
+<marks style="font-weight:700;">树的带权路径长度</marks>树中所有叶子节点带权路径长度之和即为树的带权路径长度，也称WPL,公式为<math style="color:red;">WPL=ΣWiLi</math>,其中wi指结点权值，Li为结点路径长度。<br>
+<marks style="font-weight:700;">哈夫曼树：</marks>哈夫曼树又称最优二叉树，它是所有有着n个带全叶子结点的二叉树中，带权路径长度最小的二叉树，下图则是哈夫曼二叉树示意图：
+<br>
+<br>
+<br>
+<img src="/../image/哈夫曼树结构.png">
+<br>
+<br>
+
+<h1 id="哈夫曼树的构造"><a href="#哈夫曼树的构造" class="headerlink" title="哈夫曼树的构造"></a>哈夫曼树的构造</h1><br>
+假设一共有n个权值，则构造出的哈夫曼树有n个叶子结点，分别为k1、k2....kn,该哈夫曼树的构造规则为:<br>
+（1）在k1、k2...kn看作是n个树的森林（每个树仅有一个结点）<br/>
+（2）找出森林中根结点权值最小及次小的树的根结点l1、l2，并将l1、l2作为左右子树合并为一个新树，新树根结点权值等于两子树根结点权值之和<br>
+（3）将新树放入森林中，并删除之前两子树<br>
+（4）重复(2)、(3)操作，直至森林中只存在一棵树，该树则是所求得的哈夫曼树<br>
+如：对 下图中的六个带权叶子结点来构造一棵哈夫曼树，步骤如下：<br>
+<br>
+<br>
+<img src="/../image/哈夫曼树构造过程.png">
+注意：为了使得到的哈夫曼树的结构尽量唯一，通常规定生成的哈夫曼树中每个结点的左子树根结点的权小于等于右子树根结点的权。<br>
+<br>
+<br>
+具体C语言代码实现如下：<br>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;根据权值数组创建哈夫曼树 </span><br><span class="line">BTreeNode* CreateHaffman(int a[],int n)&#123;</span><br><span class="line">	BTreeNode **p;</span><br><span class="line">	PBTreeNode q;</span><br><span class="line">	p&#x3D;(BTreeNode**)malloc(n*sizeof(PBTreeNode));</span><br><span class="line">	int k1,k2;</span><br><span class="line">	&#x2F;&#x2F;依据权值数组初始化各结点 </span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">		p[i]&#x3D;(PBTreeNode)malloc(sizeof(BTreeNode));</span><br><span class="line">		p[i]-&gt;weight&#x3D;a[i];</span><br><span class="line">		p[i]-&gt;right&#x3D;p[i]-&gt;left&#x3D;NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;将让k1指表示权值最小的树的根结点下标，k2表示权值次小的树的根结点下标 </span><br><span class="line">	for(int i&#x3D;0;i&lt;n-1;i++)&#123;</span><br><span class="line">		k1&#x3D;-1;</span><br><span class="line">	&#x2F;&#x2F;让k1指向森林中第一棵树，k2指向森林中第二棵树 </span><br><span class="line">		for(int k&#x3D;0;k&lt;n;k++)&#123;</span><br><span class="line">			if(p[k]!&#x3D;NULL&amp;&amp;k1&#x3D;&#x3D;-1)&#123;</span><br><span class="line">				k1&#x3D;k;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;else if(p[k]!&#x3D;NULL)&#123;</span><br><span class="line">				k2&#x3D;k;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int j&#x3D;k2;j&lt;n;j++)&#123;</span><br><span class="line">			if(p[j]!&#x3D;NULL&amp;&amp;p[j]-&gt;weight&lt;p[k1]-&gt;weight)&#123;</span><br><span class="line">				k2&#x3D;k1;</span><br><span class="line">				k1&#x3D;j;</span><br><span class="line">			&#125;else if(p[j]!&#x3D;NULL&amp;&amp;p[j]-&gt;weight&lt;p[k2]-&gt;weight)&#123;</span><br><span class="line">				k2&#x3D;j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		q&#x3D;(PBTreeNode)malloc(sizeof(BTreeNode));</span><br><span class="line">		q-&gt;weight&#x3D;p[k1]-&gt;weight+p[k2]-&gt;weight;</span><br><span class="line">		q-&gt;left&#x3D;p[k1];</span><br><span class="line">		q-&gt;right&#x3D;p[k2];</span><br><span class="line">		p[k1]&#x3D;q;</span><br><span class="line">		p[k2]&#x3D;NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	free(p);</span><br><span class="line">	return q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h1><p>在日常使用计算机过程中，我们常常会进行所谓的‘人机交互’，即计算机输出内容、我们的输入内容都可以我们日常生活中使用的语言的形式来实现，不过对于一台“冰冷的机器”而言，是怎样实现并理解我们的语言呢？<br>
+实际上在语言转译的过程中我们使用了编码这一概念，即计算机底层运行其实是通过二进制实现的，但我们通过将不同文字与单独的二进制串一一对应，来使得计算机可以“读懂”我们的语言，从而实现人机交互，但在实际使用编码的过程中却又出现了问题，在平时生活中总有些高频字，常常为人们所用，但在实际储存编码时如果这些常用字仍然按与其他生僻字一样的格式长度储存时未免会导致内存空间极大的浪费，因此我们是不是可以依照常用字编码越短、生僻字编码越长的规则来构造编码呢？<br>
+但这些字与编码之间的关系又难以确定，人为定义的话难免会出现遗漏，于是便引入了哈夫曼树的概念来解决这一问题，利用文字频度代替叶子结点权值的方法来构成哈夫曼树的关系，同时规定在根结点到叶子结点的路径中，每个向左的度为编码0，每个向右的度为编码1，最后将路径上所有编码输出，就可以获得每个叶子结点唯一的编码，并且符合常用字编码越短、生僻字编码越长的规则，极大地节省了内存空间。<br>
+如上文所示的哈夫曼编码如下：
+<img src="/../image/哈夫曼编码构造.png">
+a 的编码为：00<br></p>
+<p>b 的编码为：01<br></p>
+<p>c 的编码为：100<br></p>
+<p>d 的编码为：1010<br></p>
+<p>e 的编码为：1011<br></p>
+<p>f 的编码为：11<br>
+具体C语言实现代码如下：<br></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;输出每个权值结点的哈夫曼编码 </span><br><span class="line">void HaffManCoding(PBTreeNode head,int len)&#123;</span><br><span class="line">	</span><br><span class="line">	if(head!&#x3D;NULL)&#123;</span><br><span class="line">		static int a[100];	&#x2F;&#x2F;定义静态数组a，保存每个叶子的编码 </span><br><span class="line">		if(head-&gt;left&#x3D;&#x3D;NULL&amp;&amp;head-&gt;right&#x3D;&#x3D;NULL)&#123;	&#x2F;&#x2F;	访问至叶子节点时输出对应哈夫曼编码 </span><br><span class="line">			printf(&quot;权值为%d结点的编码为:&quot;,head-&gt;weight);</span><br><span class="line">			for(int i&#x3D;0;i&lt;len;i++)&#123;</span><br><span class="line">				printf(&quot;%d&quot;,a[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			printf(&quot;\n&quot;);</span><br><span class="line">		&#125;else&#123;	&#x2F;&#x2F;利用递归寻找各个叶子节点，同时通过len将左右分支的1、0编码写入数组中 </span><br><span class="line">		a[len]&#x3D;0;</span><br><span class="line">		HaffManCoding(head-&gt;left,len+1);</span><br><span class="line">		a[len]&#x3D;1;</span><br><span class="line">		HaffManCoding(head-&gt;right,len+1);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="哈夫曼树操作运算"><a href="#哈夫曼树操作运算" class="headerlink" title="哈夫曼树操作运算"></a>哈夫曼树操作运算</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">typedef struct BTreeNode&#123;</span><br><span class="line">	int weight;</span><br><span class="line">	struct BTreeNode *left;	</span><br><span class="line">	struct BTreeNode *right;</span><br><span class="line">&#125;BTreeNode,*PBTreeNode;</span><br><span class="line">&#x2F;&#x2F;输出哈夫曼树中所有结点 </span><br><span class="line">void printBTree(PBTreeNode head)&#123;</span><br><span class="line">	if(head!&#x3D;NULL)&#123;</span><br><span class="line">		printf(&quot;%d&quot;,head-&gt;weight);</span><br><span class="line">		if((head-&gt;right!&#x3D;NULL)&amp;&amp;(head-&gt;left!&#x3D;NULL))&#123;</span><br><span class="line">			printf(&quot;(&quot;);</span><br><span class="line">			printBTree(head-&gt;left);</span><br><span class="line">			printf(&quot;,&quot;);</span><br><span class="line">			printBTree(head-&gt;right);</span><br><span class="line">			printf(&quot;)&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;根据权值数组创建哈夫曼树 </span><br><span class="line">BTreeNode* CreateHaffman(int a[],int n)&#123;</span><br><span class="line">	BTreeNode **p;</span><br><span class="line">	PBTreeNode q;</span><br><span class="line">	p&#x3D;(BTreeNode**)malloc(n*sizeof(PBTreeNode));</span><br><span class="line">	int k1,k2;</span><br><span class="line">	&#x2F;&#x2F;依据权值数组初始化各结点 </span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">		p[i]&#x3D;(PBTreeNode)malloc(sizeof(BTreeNode));</span><br><span class="line">		p[i]-&gt;weight&#x3D;a[i];</span><br><span class="line">		p[i]-&gt;right&#x3D;p[i]-&gt;left&#x3D;NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;将让k1指表示权值最小的树的根结点下标，k2表示权值次小的树的根结点下标 </span><br><span class="line">	for(int i&#x3D;0;i&lt;n-1;i++)&#123;</span><br><span class="line">		k1&#x3D;-1;</span><br><span class="line">	&#x2F;&#x2F;让k1指向森林中第一棵树，k2指向森林中第二棵树 </span><br><span class="line">		for(int k&#x3D;0;k&lt;n;k++)&#123;</span><br><span class="line">			if(p[k]!&#x3D;NULL&amp;&amp;k1&#x3D;&#x3D;-1)&#123;</span><br><span class="line">				k1&#x3D;k;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;else if(p[k]!&#x3D;NULL)&#123;</span><br><span class="line">				k2&#x3D;k;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int j&#x3D;k2;j&lt;n;j++)&#123;</span><br><span class="line">			if(p[j]!&#x3D;NULL&amp;&amp;p[j]-&gt;weight&lt;p[k1]-&gt;weight)&#123;</span><br><span class="line">				k2&#x3D;k1;</span><br><span class="line">				k1&#x3D;j;</span><br><span class="line">			&#125;else if(p[j]!&#x3D;NULL&amp;&amp;p[j]-&gt;weight&lt;p[k2]-&gt;weight)&#123;</span><br><span class="line">				k2&#x3D;j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		q&#x3D;(PBTreeNode)malloc(sizeof(BTreeNode));</span><br><span class="line">		q-&gt;weight&#x3D;p[k1]-&gt;weight+p[k2]-&gt;weight;</span><br><span class="line">		q-&gt;left&#x3D;p[k1];</span><br><span class="line">		q-&gt;right&#x3D;p[k2];</span><br><span class="line">		p[k1]&#x3D;q;</span><br><span class="line">		p[k2]&#x3D;NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	free(p);</span><br><span class="line">	return q;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;求哈夫曼树的带权路径长度，其中参数len初试传入为0 </span><br><span class="line">int WeightPathLength(PBTreeNode head,int len)&#123;</span><br><span class="line">	if(head&#x3D;&#x3D;NULL)</span><br><span class="line">	return 0;</span><br><span class="line">	else&#123;</span><br><span class="line">		if(head-&gt;left&#x3D;&#x3D;NULL&amp;&amp;head-&gt;right&#x3D;&#x3D;NULL)</span><br><span class="line">			return head-&gt;weight*len;</span><br><span class="line">		else&#123;</span><br><span class="line">			return WeightPathLength(head-&gt;left,len+1)+WeightPathLength(head-&gt;right,len+1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;输出每个权值结点的哈夫曼编码 </span><br><span class="line">void HaffManCoding(PBTreeNode head,int len)&#123;</span><br><span class="line">	</span><br><span class="line">	if(head!&#x3D;NULL)&#123;</span><br><span class="line">		static int a[100];	&#x2F;&#x2F;定义静态数组a，保存每个叶子的编码 </span><br><span class="line">		if(head-&gt;left&#x3D;&#x3D;NULL&amp;&amp;head-&gt;right&#x3D;&#x3D;NULL)&#123;	&#x2F;&#x2F;	访问至叶子节点时输出对应哈夫曼编码 </span><br><span class="line">			printf(&quot;权值为%d结点的编码为:&quot;,head-&gt;weight);</span><br><span class="line">			for(int i&#x3D;0;i&lt;len;i++)&#123;</span><br><span class="line">				printf(&quot;%d&quot;,a[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			printf(&quot;\n&quot;);</span><br><span class="line">		&#125;else&#123;	&#x2F;&#x2F;利用递归寻找各个叶子节点，同时通过len将左右分支的1、0编码写入数组中 </span><br><span class="line">		a[len]&#x3D;0;</span><br><span class="line">		HaffManCoding(head-&gt;left,len+1);</span><br><span class="line">		a[len]&#x3D;1;</span><br><span class="line">		HaffManCoding(head-&gt;right,len+1);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line">int main()&#123;</span><br><span class="line">	printf(&quot;请输入带权叶子节点数目：&quot;);</span><br><span class="line">	int num;</span><br><span class="line">	while(1)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;num);</span><br><span class="line">		if(num&gt;1)</span><br><span class="line">			break;</span><br><span class="line">		else</span><br><span class="line">			printf(&quot;数据错误，请重新输入：&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	int a[num];</span><br><span class="line">	printf(&quot;请输入%d个带权叶子节点权值：&quot;,num);</span><br><span class="line">	for(int i&#x3D;0;i&lt;num;i++)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	PBTreeNode head&#x3D;CreateHaffman(a,num);</span><br><span class="line">	printf(&quot;该哈夫曼树为：&quot;);</span><br><span class="line">	printBTree(head);</span><br><span class="line">	printf(&quot;\n&quot;);</span><br><span class="line">	printf(&quot;该哈夫曼树带权路径长度为%d\n&quot;,WeightPathLength(head,0));</span><br><span class="line">	HaffManCoding(head,0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>-数据结构 -C语言 -算法</category>
+      </categories>
+      <tags>
+        <tag>-数据结构 -C语言 -算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生命游戏</title>
+    <url>/2020/04/03/%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/</url>
+    <content><![CDATA[<h2 id="生命游戏"><a href="#生命游戏" class="headerlink" title="生命游戏"></a>生命游戏</h2>]]></content>
+      <categories>
+        <category>算法</category>
+        <category>leetcode</category>
+        <category>c语言</category>
+      </categories>
+      <tags>
+        <tag>c语言</tag>
+        <tag>算法</tag>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对撞指针</title>
+    <url>/2020/04/05/%E5%AF%B9%E6%92%9E%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<h2 id="对撞指针"><a href="#对撞指针" class="headerlink" title="  对撞指针"></a>  对撞指针</h2><p>在一些算法问题中一个好的算法往往能大大地提高程序运行的效率，例如在leetcode题库中便有这么一道题求某一维数组中元素之和为零的三个数组元素，解决这个问题可以使用多个方法，往往在人们看来暴力破解是最简单的方法，但在实际应用过程中暴力破解会大大减慢程序运行的效率，而对撞指针则能较为高效率地解决这一难题。
+  <a id="more"></a>
+  原题如下：
+  <img src="/../image/对撞指针习题.png">
+对于该题中对撞指针的应用思路是先将结果看作三部分（left、mid、right），两侧的指针按照条件筛选依次向中间靠近，而中 间元素的选择也会慢慢增加，这样就可以将所有的情况都试一遍。因此首先先定义left、right两个指针，由于需要储存上一次符合条件的情况进行对比以免出现重复，因此也要创建三个对应类型的变量储存三个值(post_1、post_2、post_3),同时为了算法的正常使用初始数组也要进行按顺序的排列。</p>
+<p>在准备好特殊变量的定义及数组按顺序排列后便可进入循环来判定是否符合要求，并根据情况让left、right及时左右移动，整个就类似于左右靠近最后碰撞的情况。
+源码及各步骤解释如下：
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int compar(const void *a,const void *b) //qsort排序函数中指针型排序参数 
+{
+    return *(int *)a- *(int *)b;
+}
+int main(){
+int a[11]={-1,-2,-5,3,-4,6,-8,7,9,11,-4};
+qsort(a,11,sizeof(int),compar); //将初始数组按从大到小顺序排序 
+int size=sizeof(a)/sizeof(int); 
+int left=0; //初始化左标 
+int sum[12][3]; //初始化储存结果的数组 
+int right=size-1; //初始化右标 
+int post_1=-1,post_2=-1,post_3=-1; //定义储存之前符合条件的值的”容器” 
+int m=0;<br>for(int i=1;i&lt;size-1;i++){
+    if(a[i]!=a[i-1]) //若此时数组元素与前一个元素相等则不对其左右标初始化，以保证不会出现重复及缩短运算时间 
+    {
+        left=0;
+        right=size-1;
+    }
+    while(left&lt;i&amp;&amp;right&gt;i){
+        if(a[left]&gt;0){ //若最开始左标大于0则三者和不可能等于0（直接退出循环） 
+            break;
+        }
+        else if(a[left]+a[i]+a[right]&gt;0){ //若三数和大于0，则右标左移（对应值减小） 
+            right–;
+        }
+        else if(a[left]+a[i]+a[right]&lt;0){ //若三数和小于0，则左标右移（对应值增大） 
+            left++;
+        }
+        else
+        {
+            if(!(a[left]==post_1&amp;&amp;a[i]==post_2&amp;&amp;a[right]==post_3)){ //判断等于0时三数是否与之前有重复 
+                sum[m][0]=a[left];
+                sum[m][1]=a[i];
+                sum[m][2]=a[right];
+                m++;
+                post_1=a[left];
+                post_2=a[i];
+                post_3=a[right];
+                printf(“%d %d %d\n”,a[left],a[i],a[right]);
+            }
+            left++; //默认右移左标推动循环 
+        }
+    }
+}
+} </p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>leetcode</category>
+        <category>c语言</category>
+      </categories>
+      <tags>
+        <tag>c语言</tag>
+        <tag>算法</tag>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性表的顺序表示</title>
+    <url>/2020/04/16/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一篇博客</title>
+    <url>/2020/03/08/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="博客测试"><a href="#博客测试" class="headerlink" title="博客测试"></a>博客测试</h2>]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+</search>
