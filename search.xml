@@ -79,11 +79,6 @@
       </tags>
   </entry>
   <entry>
-    <title>个人网站搭建通知</title>
-    <url>/2020/03/04/%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E9%80%9A%E7%9F%A5/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>servlet有关问题</title>
     <url>/2020/10/20/servlet%E6%9C%89%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>由于个人疏忽，在学习过程中总是丢三落四，导致在实践操作中走了不少弯路，今天恰好在初次尝试jsp中servlet的时候就出现了问题，趁此机会将问题及其解决方法记录下来，供以提醒自己需要时刻小心。</p>
@@ -124,128 +119,9 @@
       </tags>
   </entry>
   <entry>
-    <title>关于c语言算法题解（一）</title>
-    <url>/2020/03/10/%E5%85%B3%E4%BA%8Ec%E8%AF%AD%E8%A8%80%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="字母金字塔问题"><a href="#字母金字塔问题" class="headerlink" title="字母金字塔问题"></a>字母金字塔问题</h2><p>具体题目如下：</p>
-<p>编写一个程序，提示用户输入大写字母。使用嵌套循环以下面金字塔
-型的格式打印字母：
-A
-ABA
-ABCBA
-ABCDCBA
-ABCDEDCBA
-打印这样的图形，要根据用户输入的字母来决定。例如，上面的图形是
-在用户输入E后的打印结果.</p>
-<a id="more"></a>
-
-<p>解题思路：
-·由该题提示由用户输入大写字母来对应“字母金字塔”的层级，可知可以根据ASCII中‘A’和其他字母的差值来判断“字母金字塔”的层级，由此可得代码：char n; int m;scanf(“%c”,&amp;n); m=’A’-n+1;</p>
-<p>·观察整体“字母金字塔”可知由上述m决定了“字母金字塔”的层数，因此提前设置一个每次都会换行的for循环（底部内嵌printf（”\n”）;</p>
-<p>·观察”字母金字塔”可得出规律，字母由’A’正序增长个数由层级决定，例如第三层则字母正序由’A’增长至’c’，增长了三次，因此可以在上述循环内设置一个由m决定的for循环，内嵌输出一个由’A’开始每次都会增长的字符</p>
-<p>观察后续规律可知每次对应字母增长后若不为’A’，都会减少1 ASCII值，随后一次输出对应字母直至’A’，因此在自增循环后在添加一自减循环(需注意应先减1 ASCII值)</p>
-<p>答案：</p>
-<p>由上述分析易知代码如下：
-#include &lt;stdio.h&gt;
-int main(void)
-{
-    int m,o;
-    char n;
-    printf(“请输入你所要的层级\n”);
-    scanf(“%c”,&amp;n);
-    m=n-‘A’+1;
-    for(int i=0;i&lt;m;i++)
-    {
-        char s=’A’;
-        for(o=0;o&lt;i+1;o++)
-        {
-           printf(“%c”,s);
-           s=s+1;
-        }
-        s=s-1;
-        for(int u=0;u&lt;i;u++)
-        {
-            s=s-1;
-            printf(“%c”,s);
-        }
-        printf(“\n”);
-    }
-}</p>
-]]></content>
-      <categories>
-        <category>c语言</category>
-      </categories>
-      <tags>
-        <tag>c语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>堆栈和队列</title>
-    <url>/2020/04/14/%E5%A0%86%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
-    <content><![CDATA[<p>这几天初学堆栈和队列，起初没多么在意两者区别，认为所谓有所不同也都是基于在链表使用的基础上的使用，只要记住了堆栈先进后出的存取方式而队列与之相反这想法就可以清楚的分清两者的界限了(正所谓“有端联想” (“ps:自欺欺人”)罢了)，这种可有可无的东西用不着太在意，但今天一看到mooc上的“用两个堆栈来表示队列”的有关题目时就蒙圈了，初看时竟然还天真的想着可以一直由一个堆栈入栈再出栈进入第二个栈，随之出栈就可以轻轻松松的实现“无限循环了”，当看到最后的答案时转过头来才发现自己是多么的天真，知其然却不知其所以然，果然还是要多去了解个所以然才能免得贻笑大方。于是又绞尽脑汁地把前两天看的数据结构的知识点在这做个小结了。</p>
-<a id="more"></a>
-
-<h2 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h2><p>堆栈可以看作一种特殊的储存区，可以在运算时暂存数据，堆栈存取数据的规则是“先进后出FILO”，最先储存的数据储存在栈底，而整个堆栈可以看作一个下闭上开的区间，储存数据是由上方存入的，使用数据时也是由上方先取出，这便是“先进后出FILO”，用某位老师的话讲就好比是叠盘子，用的时候也是从上面拿的。像递归、中缀转后缀表达式等都可以通过堆栈实现。</p>
-<p>堆栈的实现规则：通常堆栈可以由数组或链表来实现，对于数组而言可以让头节点分别位于两端，插入、删除操作都可指定执行，而链表储存的话基于链表的特点，头节点只能位于头部(位于末端的话插入操作可以正常进行，但删除操作执行后头节点就无法继续链接至上个节点了)。</p>
-<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>队列和堆栈一样都可以看作时一种特殊的储存区，队列存取数据的规则是“先进先出”，最先储存的数据可以最先出队，在生成队列会又两个节点表示插入端和删除端(以插入端顺序末尾为头节点)，因此队列在便遍历时可以选择从头或者从尾开始遍历(但不能同时遍历)，因此遍历速度会快于堆栈。</p>
-<h2 id="如何用两个堆栈模拟实现一个队列-如果这两个堆栈的容量分别是m和n（m-gt-n-，你的方法能保证的队列容量是多少？"><a href="#如何用两个堆栈模拟实现一个队列-如果这两个堆栈的容量分别是m和n（m-gt-n-，你的方法能保证的队列容量是多少？" class="headerlink" title="如何用两个堆栈模拟实现一个队列?  如果这两个堆栈的容量分别是m和n（m&gt;n)，你的方法能保证的队列容量是多少？"></a>如何用两个堆栈模拟实现一个队列?  如果这两个堆栈的容量分别是m和n（m&gt;n)，你的方法能保证的队列容量是多少？</h2><p>用容量较小的堆栈作为缓冲区，容量较大的作为储存区，先向储存区压入n个，但由于队列是先进先出，所以再把这n个出栈压进缓冲区，再向储存区压入n+1个，将缓冲区出栈清空后，再将储存区后n个压入缓冲区，此时多余的一个(这n+1个中最先入栈的)会因缓冲区满了直接出栈，接下来再清空缓冲区，这样就可以满足队列先进先出的特点了，因此最大容量为2n+1</p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-        <tag>课后总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人博客实战及链接</title>
-    <url>/2020/07/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98%E5%8F%8A%E9%93%BE%E6%8E%A5/</url>
-    <content><![CDATA[<h2 id="个人博客创建思路"><a href="#个人博客创建思路" class="headerlink" title="个人博客创建思路"></a>个人博客创建思路</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;自主从学习计科以来就想着能够自己做个人博客，正好本学期网页设计课程的期末大作业就是设计一个属于自己的网站，于是便早早地开始着手准备，整个过程持续了大概两个月。<br>&nbsp;&nbsp;&nbsp;&nbsp;个人博客是一个体现个人个性的网页，于是在一开始的设计规划时便想着极可能的将该博客做的更加个性化，但经过一段时间的苦思冥想仍旧一无所获，对于如何设计布局、开始下手还是毫无思绪，于是在接下来的几天参考了各个大佬的个人博客，最终初步定型了设计样式。</p>
-<a id="more"></a>
-<h2 id="个人博客的设计过程"><a href="#个人博客的设计过程" class="headerlink" title="个人博客的设计过程"></a>个人博客的设计过程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;整个个人博客的设计过程也是历尽坎坷，一开始只是想着自己一个人闷着头去慢慢敲总会有结果的，如此这般忽视了基础的重要性，一味的天马行空导致耗费了大量时间却只能写出一个简略的个人博客，写完后才意识到基础知识的重要性，于是便开始漫长的查找及学习过程，大部分学习资源都是通过b站及w3school得到的，经过了一段时间的学习后再次开始个人博客的设计时便感到更加的得心应手了，一开始不能解决的问题慢慢地就迎刃而解了，例如解决因窗口缩放问题而导致网页整体布局乱序地问题，在一开始的设计过程中百思不得其解，而后来看只是当初一味地追求新颖而使用绝对定位的问题，网页布局使用百分比或者窗口比例大小来设计不然容易理解，但在面对窗口缩放时问题便接踵而来了，网页布局便会随着窗口缩放而变化，原先的布局统统被打乱了，于是在实际体验中这种方法是万万行不通的，有了第一次的沉痛教训之后，在第二次个人博客的设计过程中便开始注意这些小问题了，所谓”兵来将挡，水来土掩”，在设计过程中势必会遇到或多或少的问题，但大多经过了不懈的学习后都慢慢的解决了。<br>&nbsp;&nbsp;&nbsp;&nbsp;整体网页使用了html5、css3，一开始使用Dreamweaver设计，但鉴于个人不适应Dreamweaver，于是转用vscode进行设计，在设计的过程中也使用了b站、csdn、博客园的途径获取有关学习资源。</p>
-<h2 id="学习心得"><a href="#学习心得" class="headerlink" title="学习心得"></a>学习心得</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;”纸上得来终觉浅，得知此事要躬行”，尽管课上认真听讲能够学习并牢牢记住大部分的知识点，但理论若脱离实践的话终究只是一纸空谈无凭无据，适当的实践操作不仅能够强化记忆、查漏补缺，更能通过实践过程中自己动手解决遇到的问题加深对各个知识点的理解，虽然本次个人博客的设计前前后后花费不少时间、走过不少弯路、碰见过或多或少、大大小小的问题，但最后收获颇丰，值得值得！！</p>
-<h2 id="跳转链接"><a href="#跳转链接" class="headerlink" title="跳转链接"></a>跳转链接</h2><p>有关站点已经部署在GitHub的仓库里了，可以直接访问。<br>个人博客：<a href="https://jiaweizhao123.github.io/rushtime.github.io/index.html" target="_blank" rel="noopener">https://jiaweizhao123.github.io/rushtime.github.io/index.html</a><br>课设作业(书香阁)：<a href="https://jiaweizhao123.github.io/bookshouse.github.io/" target="_blank" rel="noopener">https://jiaweizhao123.github.io/bookshouse.github.io/</a></p>
-]]></content>
-      <categories>
-        <category>html</category>
-        <category>css</category>
-        <category>网页设计</category>
-      </categories>
-      <tags>
-        <tag>网页设计</tag>
-        <tag>html</tag>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>正整数A+B</title>
-    <url>/2020/10/27/%E6%AD%A3%E6%95%B4%E6%95%B0A-B/</url>
-    <content><![CDATA[<p>&emsp;&emsp;本题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。</p>
-<a id="more"></a>
-<h1>L1-025 正整数A+B</h1><br>
-&emsp;&emsp;题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。
-
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>&emsp;&emsp;输入在一行给出A和B，其间以空格分开。问题是A和B不一定是满足要求的正整数，有时候可能是超出范围的数字、负数、带小数点的实数、甚至是一堆乱码。</p>
-<p>&emsp;&emsp;<point style="color:red;">注意：我们把输入中出现的第1个空格认为是A和B的分隔。题目保证至少存在一个空格，并且B不是一个空字符串。</point></p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>&emsp;&emsp;如果输入的确是两个正整数，则按格式”A + B = “和输出。如果某个输入不合要求，则在相应位置输出”?”，显然此时和也是”?”。</p>
-<h2 id="输入样例1"><a href="#输入样例1" class="headerlink" title="输入样例1"></a>输入样例1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">123 456</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出样例1"><a href="#输出样例1" class="headerlink" title="输出样例1"></a>输出样例1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">123 + 456 &#x3D; 579</span><br></pre></td></tr></table></figure>
-
-<h2 id="输入样例2"><a href="#输入样例2" class="headerlink" title="输入样例2"></a>输入样例2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">22. 18</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出样例2"><a href="#输出样例2" class="headerlink" title="输出样例2"></a>输出样例2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">? + 18 &#x3D; ?</span><br></pre></td></tr></table></figure>
-
-<h2 id="输入样例3"><a href="#输入样例3" class="headerlink" title="输入样例3"></a>输入样例3</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-100 blabla bla...33</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出样例3"><a href="#输出样例3" class="headerlink" title="输出样例3"></a>输出样例3</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">? + ? &#x3D; ?</span><br></pre></td></tr></table></figure>
-
-<h2 id="解析"><a href="#解析" class="headerlink" title="解析:"></a>解析:</h2><p>&emsp;&emsp;本题重点在上方已经用红字重点标注出来了，在输入过程中，<point style="font-weight:700;">不管有几个空格，都是以第一个空格为界限！</point>因此在第一个空格过后都是属于第二个数的数据。</p>
-<h2 id="程序源码"><a href="#程序源码" class="headerlink" title="程序源码"></a>程序源码</h2><p>&emsp;&emsp;该答案中用m、n分别表示第一个数据、第二个数据的字符字符总和，用x、y分别表示第一个数据、第二个数据的数字总和，最后如果m=x,n=y的话则证明两个数据都是正整数，否则就根据不同情况做出判断.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    string a;</span><br><span class="line">    getline(cin,a);</span><br><span class="line">    int m&#x3D;0,n&#x3D;0;</span><br><span class="line">    int x&#x3D;0,y&#x3D;0;</span><br><span class="line">    int i&#x3D;0;</span><br><span class="line">    for(i&#x3D;0;i&lt;a.length();i++)&#123;</span><br><span class="line">        if(a[i]&#x3D;&#x3D;&#39; &#39;) break;</span><br><span class="line">        m&#x3D;m*10+(a[i]-&#39;0&#39;);</span><br><span class="line">        if(a[i]&gt;&#x3D;&#39;0&#39;&amp;&amp;a[i]&lt;&#x3D;&#39;9&#39;)</span><br><span class="line">            x&#x3D;x*10+(a[i]-&#39;0&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int j&#x3D;i+1;j&lt;a.length();j++)&#123;</span><br><span class="line">        n&#x3D;n*10+(a[j]-&#39;0&#39;);</span><br><span class="line">        if(a[j]&gt;&#x3D;&#39;0&#39;&amp;&amp;a[j]&lt;&#x3D;&#39;9&#39;)</span><br><span class="line">            y&#x3D;y*10+(a[j]-&#39;0&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    if(m&lt;&#x3D;1000&amp;&amp;m&gt;&#x3D;1&amp;&amp;(m&#x3D;&#x3D;x))</span><br><span class="line">        cout&lt;&lt;m;</span><br><span class="line">    else    </span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    cout&lt;&lt;&quot; + &quot;;</span><br><span class="line">    if(n&lt;&#x3D;1000&amp;&amp;n&gt;&#x3D;1&amp;&amp;(n&#x3D;&#x3D;y))</span><br><span class="line">        cout&lt;&lt;n;</span><br><span class="line">    else </span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    cout&lt;&lt;&quot; &#x3D; &quot;;</span><br><span class="line">    if(m&lt;&#x3D;1000&amp;&amp;m&gt;&#x3D;1&amp;&amp;(m&#x3D;&#x3D;x)&amp;&amp;n&lt;&#x3D;1000&amp;&amp;n&gt;&#x3D;1&amp;&amp;(n&#x3D;&#x3D;y))</span><br><span class="line">        cout&lt;&lt;m+n;</span><br><span class="line">    else</span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>-程序设计天梯赛 -数据结构与算法 -c++</category>
-      </categories>
-      <tags>
-        <tag>-程序设计天梯赛 -数据结构与算法 -c++</tag>
-      </tags>
+    <title>个人网站搭建通知</title>
+    <url>/2020/03/04/%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E9%80%9A%E7%9F%A5/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>哈夫曼树的构造</title>
@@ -305,18 +181,78 @@ a 的编码为：00<br></p>
       </tags>
   </entry>
   <entry>
-    <title>生命游戏</title>
-    <url>/2020/04/03/%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/</url>
-    <content><![CDATA[<h2 id="生命游戏"><a href="#生命游戏" class="headerlink" title="生命游戏"></a>生命游戏</h2>]]></content>
+    <title>个人博客实战及链接</title>
+    <url>/2020/07/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%AE%9E%E6%88%98%E5%8F%8A%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[<h2 id="个人博客创建思路"><a href="#个人博客创建思路" class="headerlink" title="个人博客创建思路"></a>个人博客创建思路</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;自主从学习计科以来就想着能够自己做个人博客，正好本学期网页设计课程的期末大作业就是设计一个属于自己的网站，于是便早早地开始着手准备，整个过程持续了大概两个月。<br>&nbsp;&nbsp;&nbsp;&nbsp;个人博客是一个体现个人个性的网页，于是在一开始的设计规划时便想着极可能的将该博客做的更加个性化，但经过一段时间的苦思冥想仍旧一无所获，对于如何设计布局、开始下手还是毫无思绪，于是在接下来的几天参考了各个大佬的个人博客，最终初步定型了设计样式。</p>
+<a id="more"></a>
+<h2 id="个人博客的设计过程"><a href="#个人博客的设计过程" class="headerlink" title="个人博客的设计过程"></a>个人博客的设计过程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;整个个人博客的设计过程也是历尽坎坷，一开始只是想着自己一个人闷着头去慢慢敲总会有结果的，如此这般忽视了基础的重要性，一味的天马行空导致耗费了大量时间却只能写出一个简略的个人博客，写完后才意识到基础知识的重要性，于是便开始漫长的查找及学习过程，大部分学习资源都是通过b站及w3school得到的，经过了一段时间的学习后再次开始个人博客的设计时便感到更加的得心应手了，一开始不能解决的问题慢慢地就迎刃而解了，例如解决因窗口缩放问题而导致网页整体布局乱序地问题，在一开始的设计过程中百思不得其解，而后来看只是当初一味地追求新颖而使用绝对定位的问题，网页布局使用百分比或者窗口比例大小来设计不然容易理解，但在面对窗口缩放时问题便接踵而来了，网页布局便会随着窗口缩放而变化，原先的布局统统被打乱了，于是在实际体验中这种方法是万万行不通的，有了第一次的沉痛教训之后，在第二次个人博客的设计过程中便开始注意这些小问题了，所谓”兵来将挡，水来土掩”，在设计过程中势必会遇到或多或少的问题，但大多经过了不懈的学习后都慢慢的解决了。<br>&nbsp;&nbsp;&nbsp;&nbsp;整体网页使用了html5、css3，一开始使用Dreamweaver设计，但鉴于个人不适应Dreamweaver，于是转用vscode进行设计，在设计的过程中也使用了b站、csdn、博客园的途径获取有关学习资源。</p>
+<h2 id="学习心得"><a href="#学习心得" class="headerlink" title="学习心得"></a>学习心得</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;”纸上得来终觉浅，得知此事要躬行”，尽管课上认真听讲能够学习并牢牢记住大部分的知识点，但理论若脱离实践的话终究只是一纸空谈无凭无据，适当的实践操作不仅能够强化记忆、查漏补缺，更能通过实践过程中自己动手解决遇到的问题加深对各个知识点的理解，虽然本次个人博客的设计前前后后花费不少时间、走过不少弯路、碰见过或多或少、大大小小的问题，但最后收获颇丰，值得值得！！</p>
+<h2 id="跳转链接"><a href="#跳转链接" class="headerlink" title="跳转链接"></a>跳转链接</h2><p>有关站点已经部署在GitHub的仓库里了，可以直接访问。<br>个人博客：<a href="https://jiaweizhao123.github.io/rushtime.github.io/index.html" target="_blank" rel="noopener">https://jiaweizhao123.github.io/rushtime.github.io/index.html</a><br>课设作业(书香阁)：<a href="https://jiaweizhao123.github.io/bookshouse.github.io/" target="_blank" rel="noopener">https://jiaweizhao123.github.io/bookshouse.github.io/</a></p>
+]]></content>
       <categories>
-        <category>算法</category>
-        <category>leetcode</category>
+        <category>html</category>
+        <category>css</category>
+        <category>网页设计</category>
+      </categories>
+      <tags>
+        <tag>网页设计</tag>
+        <tag>html</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于c语言算法题解（一）</title>
+    <url>/2020/03/10/%E5%85%B3%E4%BA%8Ec%E8%AF%AD%E8%A8%80%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="字母金字塔问题"><a href="#字母金字塔问题" class="headerlink" title="字母金字塔问题"></a>字母金字塔问题</h2><p>具体题目如下：</p>
+<p>编写一个程序，提示用户输入大写字母。使用嵌套循环以下面金字塔
+型的格式打印字母：
+A
+ABA
+ABCBA
+ABCDCBA
+ABCDEDCBA
+打印这样的图形，要根据用户输入的字母来决定。例如，上面的图形是
+在用户输入E后的打印结果.</p>
+<a id="more"></a>
+
+<p>解题思路：
+·由该题提示由用户输入大写字母来对应“字母金字塔”的层级，可知可以根据ASCII中‘A’和其他字母的差值来判断“字母金字塔”的层级，由此可得代码：char n; int m;scanf(“%c”,&amp;n); m=’A’-n+1;</p>
+<p>·观察整体“字母金字塔”可知由上述m决定了“字母金字塔”的层数，因此提前设置一个每次都会换行的for循环（底部内嵌printf（”\n”）;</p>
+<p>·观察”字母金字塔”可得出规律，字母由’A’正序增长个数由层级决定，例如第三层则字母正序由’A’增长至’c’，增长了三次，因此可以在上述循环内设置一个由m决定的for循环，内嵌输出一个由’A’开始每次都会增长的字符</p>
+<p>观察后续规律可知每次对应字母增长后若不为’A’，都会减少1 ASCII值，随后一次输出对应字母直至’A’，因此在自增循环后在添加一自减循环(需注意应先减1 ASCII值)</p>
+<p>答案：</p>
+<p>由上述分析易知代码如下：
+#include &lt;stdio.h&gt;
+int main(void)
+{
+    int m,o;
+    char n;
+    printf(“请输入你所要的层级\n”);
+    scanf(“%c”,&amp;n);
+    m=n-‘A’+1;
+    for(int i=0;i&lt;m;i++)
+    {
+        char s=’A’;
+        for(o=0;o&lt;i+1;o++)
+        {
+           printf(“%c”,s);
+           s=s+1;
+        }
+        s=s-1;
+        for(int u=0;u&lt;i;u++)
+        {
+            s=s-1;
+            printf(“%c”,s);
+        }
+        printf(“\n”);
+    }
+}</p>
+]]></content>
+      <categories>
         <category>c语言</category>
       </categories>
       <tags>
         <tag>c语言</tag>
-        <tag>算法</tag>
-        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -389,12 +325,67 @@ int m=0;<br>for(int i=1;i&lt;size-1;i++){
       </tags>
   </entry>
   <entry>
-    <title>线性表的顺序表示</title>
-    <url>/2020/04/16/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA/</url>
-    <content><![CDATA[]]></content>
+    <title>堆栈和队列</title>
+    <url>/2020/04/14/%E5%A0%86%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<p>这几天初学堆栈和队列，起初没多么在意两者区别，认为所谓有所不同也都是基于在链表使用的基础上的使用，只要记住了堆栈先进后出的存取方式而队列与之相反这想法就可以清楚的分清两者的界限了(正所谓“有端联想” (“ps:自欺欺人”)罢了)，这种可有可无的东西用不着太在意，但今天一看到mooc上的“用两个堆栈来表示队列”的有关题目时就蒙圈了，初看时竟然还天真的想着可以一直由一个堆栈入栈再出栈进入第二个栈，随之出栈就可以轻轻松松的实现“无限循环了”，当看到最后的答案时转过头来才发现自己是多么的天真，知其然却不知其所以然，果然还是要多去了解个所以然才能免得贻笑大方。于是又绞尽脑汁地把前两天看的数据结构的知识点在这做个小结了。</p>
+<a id="more"></a>
+
+<h2 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h2><p>堆栈可以看作一种特殊的储存区，可以在运算时暂存数据，堆栈存取数据的规则是“先进后出FILO”，最先储存的数据储存在栈底，而整个堆栈可以看作一个下闭上开的区间，储存数据是由上方存入的，使用数据时也是由上方先取出，这便是“先进后出FILO”，用某位老师的话讲就好比是叠盘子，用的时候也是从上面拿的。像递归、中缀转后缀表达式等都可以通过堆栈实现。</p>
+<p>堆栈的实现规则：通常堆栈可以由数组或链表来实现，对于数组而言可以让头节点分别位于两端，插入、删除操作都可指定执行，而链表储存的话基于链表的特点，头节点只能位于头部(位于末端的话插入操作可以正常进行，但删除操作执行后头节点就无法继续链接至上个节点了)。</p>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>队列和堆栈一样都可以看作时一种特殊的储存区，队列存取数据的规则是“先进先出”，最先储存的数据可以最先出队，在生成队列会又两个节点表示插入端和删除端(以插入端顺序末尾为头节点)，因此队列在便遍历时可以选择从头或者从尾开始遍历(但不能同时遍历)，因此遍历速度会快于堆栈。</p>
+<h2 id="如何用两个堆栈模拟实现一个队列-如果这两个堆栈的容量分别是m和n（m-gt-n-，你的方法能保证的队列容量是多少？"><a href="#如何用两个堆栈模拟实现一个队列-如果这两个堆栈的容量分别是m和n（m-gt-n-，你的方法能保证的队列容量是多少？" class="headerlink" title="如何用两个堆栈模拟实现一个队列?  如果这两个堆栈的容量分别是m和n（m&gt;n)，你的方法能保证的队列容量是多少？"></a>如何用两个堆栈模拟实现一个队列?  如果这两个堆栈的容量分别是m和n（m&gt;n)，你的方法能保证的队列容量是多少？</h2><p>用容量较小的堆栈作为缓冲区，容量较大的作为储存区，先向储存区压入n个，但由于队列是先进先出，所以再把这n个出栈压进缓冲区，再向储存区压入n+1个，将缓冲区出栈清空后，再将储存区后n个压入缓冲区，此时多余的一个(这n+1个中最先入栈的)会因缓冲区满了直接出栈，接下来再清空缓冲区，这样就可以满足队列先进先出的特点了，因此最大容量为2n+1</p>
+]]></content>
       <tags>
         <tag>数据结构</tag>
+        <tag>课后总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正整数A+B</title>
+    <url>/2020/10/27/%E6%AD%A3%E6%95%B4%E6%95%B0A-B/</url>
+    <content><![CDATA[<p>&emsp;&emsp;本题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。</p>
+<a id="more"></a>
+<h1>L1-025 正整数A+B</h1><br>
+&emsp;&emsp;题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。
+
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>&emsp;&emsp;输入在一行给出A和B，其间以空格分开。问题是A和B不一定是满足要求的正整数，有时候可能是超出范围的数字、负数、带小数点的实数、甚至是一堆乱码。</p>
+<p>&emsp;&emsp;<point style="color:red;">注意：我们把输入中出现的第1个空格认为是A和B的分隔。题目保证至少存在一个空格，并且B不是一个空字符串。</point></p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>&emsp;&emsp;如果输入的确是两个正整数，则按格式”A + B = “和输出。如果某个输入不合要求，则在相应位置输出”?”，显然此时和也是”?”。</p>
+<h2 id="输入样例1"><a href="#输入样例1" class="headerlink" title="输入样例1"></a>输入样例1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">123 456</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例1"><a href="#输出样例1" class="headerlink" title="输出样例1"></a>输出样例1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">123 + 456 &#x3D; 579</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入样例2"><a href="#输入样例2" class="headerlink" title="输入样例2"></a>输入样例2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">22. 18</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例2"><a href="#输出样例2" class="headerlink" title="输出样例2"></a>输出样例2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">? + 18 &#x3D; ?</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入样例3"><a href="#输入样例3" class="headerlink" title="输入样例3"></a>输入样例3</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-100 blabla bla...33</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例3"><a href="#输出样例3" class="headerlink" title="输出样例3"></a>输出样例3</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">? + ? &#x3D; ?</span><br></pre></td></tr></table></figure>
+
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析:"></a>解析:</h2><p>&emsp;&emsp;本题重点在上方已经用红字重点标注出来了，在输入过程中，<point style="font-weight:700;">不管有几个空格，都是以第一个空格为界限！</point>因此在第一个空格过后都是属于第二个数的数据。</p>
+<h2 id="程序源码"><a href="#程序源码" class="headerlink" title="程序源码"></a>程序源码</h2><p>&emsp;&emsp;该答案中用m、n分别表示第一个数据、第二个数据的字符字符总和，用x、y分别表示第一个数据、第二个数据的数字总和，最后如果m=x,n=y的话则证明两个数据都是正整数，否则就根据不同情况做出判断.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">    string a;</span><br><span class="line">    getline(cin,a);</span><br><span class="line">    int m&#x3D;0,n&#x3D;0;</span><br><span class="line">    int x&#x3D;0,y&#x3D;0;</span><br><span class="line">    int i&#x3D;0;</span><br><span class="line">    for(i&#x3D;0;i&lt;a.length();i++)&#123;</span><br><span class="line">        if(a[i]&#x3D;&#x3D;&#39; &#39;) break;</span><br><span class="line">        m&#x3D;m*10+(a[i]-&#39;0&#39;);</span><br><span class="line">        if(a[i]&gt;&#x3D;&#39;0&#39;&amp;&amp;a[i]&lt;&#x3D;&#39;9&#39;)</span><br><span class="line">            x&#x3D;x*10+(a[i]-&#39;0&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    for(int j&#x3D;i+1;j&lt;a.length();j++)&#123;</span><br><span class="line">        n&#x3D;n*10+(a[j]-&#39;0&#39;);</span><br><span class="line">        if(a[j]&gt;&#x3D;&#39;0&#39;&amp;&amp;a[j]&lt;&#x3D;&#39;9&#39;)</span><br><span class="line">            y&#x3D;y*10+(a[j]-&#39;0&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    if(m&lt;&#x3D;1000&amp;&amp;m&gt;&#x3D;1&amp;&amp;(m&#x3D;&#x3D;x))</span><br><span class="line">        cout&lt;&lt;m;</span><br><span class="line">    else    </span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    cout&lt;&lt;&quot; + &quot;;</span><br><span class="line">    if(n&lt;&#x3D;1000&amp;&amp;n&gt;&#x3D;1&amp;&amp;(n&#x3D;&#x3D;y))</span><br><span class="line">        cout&lt;&lt;n;</span><br><span class="line">    else </span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    cout&lt;&lt;&quot; &#x3D; &quot;;</span><br><span class="line">    if(m&lt;&#x3D;1000&amp;&amp;m&gt;&#x3D;1&amp;&amp;(m&#x3D;&#x3D;x)&amp;&amp;n&lt;&#x3D;1000&amp;&amp;n&gt;&#x3D;1&amp;&amp;(n&#x3D;&#x3D;y))</span><br><span class="line">        cout&lt;&lt;m+n;</span><br><span class="line">    else</span><br><span class="line">        cout&lt;&lt;&quot;?&quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>-程序设计天梯赛 -数据结构与算法 -c++</category>
+      </categories>
+      <tags>
+        <tag>-程序设计天梯赛 -数据结构与算法 -c++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生命游戏</title>
+    <url>/2020/04/03/%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/</url>
+    <content><![CDATA[<h2 id="生命游戏"><a href="#生命游戏" class="headerlink" title="生命游戏"></a>生命游戏</h2>]]></content>
+      <categories>
+        <category>算法</category>
+        <category>leetcode</category>
+        <category>c语言</category>
+      </categories>
+      <tags>
+        <tag>c语言</tag>
         <tag>算法</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -406,6 +397,70 @@ int m=0;<br>for(int i=1;i&lt;size-1;i++){
       </categories>
       <tags>
         <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性表的顺序表示</title>
+    <url>/2020/04/16/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC实现RESTful风格请求实现</title>
+    <url>/2021/05/23/SpringMVC%E5%AE%9E%E7%8E%B0RESTful%E9%A3%8E%E6%A0%BC%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>博主最近在学习springmvc，因此会重新更新，记录在学习中的心得以及遇到的问题和对应的解决方法。
+本篇博客介绍了SpringMVC中RESTful风格请求的实现。</p>
+<a id="more"></a>
+<h1 id="RESTful概念及功能"><a href="#RESTful概念及功能" class="headerlink" title="RESTful概念及功能"></a>RESTful概念及功能</h1><ul>
+<li><p><strong>RESTful的概念</strong>：RESTful  是一种资源定位及资源操作的风格，其本身既不是标准也不是协议，而是一种设计风格，可以使得软件整体层次更加分明、代码更加简洁，并且有利于实现缓存等机制。</p>
+</li>
+<li><p><strong>RESTful的功能</strong>：RESTful主要体现在对软件资源的操作上，把请求方法分为了POST、DELETE、PUT、GET四个部分，各个方法对资源进行操作分别对应了增删改查四个功能，使得代码整体层次分明。</p>
+</li>
+<li><p><strong>RESTful与传统操作资源的对比</strong>：传统方式对资源操作形式单一，只有GET、POST两种方式，对于增删改查各种方式往往难以加以区分，且部分参数在url中过于暴露，各种不同参数实现不同效果</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/user/query?id=1 ;查询用户(GET)</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/user/add ;新增用户(POST)</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/user/update ;更新用户(POST)</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/user/delete?id=1 ;删除用户(GET或POST)</span><br></pre></td></tr></table></figure>
+
+<p>而RESTful确能很好地解决这个问题，可以将增删改查分为POST、DELETE、PUT、GET，并可以通过相同的请求地址实现</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/user/1 ;查询用户(GET)</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/user ;新增用户(POST)</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/user ;更新用户(PUT)</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/user/1 ;删除用户(DELETE)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h1 id="SpringMVC实现RESTful风格"><a href="#SpringMVC实现RESTful风格" class="headerlink" title="SpringMVC实现RESTful风格"></a>SpringMVC实现RESTful风格</h1><p>在传统jsp及大部分浏览器中只能处理POST、GET请求，在SpringMVC中针对这两种请求可以正常处理，并且在该框架控制器@RequestMapping注解中提供了method参数用以注明请求方式，可以使同参数请求实现不同功能</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"testRest/&#123;id&#125;"</span>,method = RequestMethod.POST)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testPost</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">    System.out.println(id);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"testRest/&#123;id&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testGet</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">    System.out.println(id);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但对于DELETE、PUT而言则无法通过简单的注解标明实现，因此为了能够使RESTful风格能够正常实现，SpringMVC中通过在Filter过滤器中添加HiddenHttpMethodFilter类处理来实现对DELETE、PUT的处理，HiddenHttpMethodFilter类源码中对请求的处理如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** Default method parameter: &#123;<span class="doctag">@code</span> _method&#125;. */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_METHOD_PARAM = <span class="string">"_method"</span>;	<span class="comment">//默认_method规范</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> String methodParam = DEFAULT_METHOD_PARAM;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set the parameter name to look for HTTP methods.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> #DEFAULT_METHOD_PARAM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMethodParam</span><span class="params">(String methodParam)</span> </span>&#123;</span><br><span class="line">	Assert.hasText(methodParam, <span class="string">"'methodParam' must not be empty"</span>);</span><br><span class="line">	<span class="keyword">this</span>.methodParam = methodParam;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doFilterInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)</span></span></span><br><span class="line"><span class="function">		<span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">	HttpServletRequest requestToUse = request;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="string">"POST"</span>.equals(request.getMethod()) &amp;&amp; request.getAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE) == <span class="keyword">null</span>) &#123;	<span class="comment">//POST及隐藏域条件判断</span></span><br><span class="line">		String paramValue = request.getParameter(<span class="keyword">this</span>.methodParam);	<span class="comment">//	获取name为_method的value</span></span><br><span class="line">		<span class="keyword">if</span> (StringUtils.hasLength(paramValue)) &#123;</span><br><span class="line">			String method = paramValue.toUpperCase(Locale.ENGLISH);</span><br><span class="line">			<span class="keyword">if</span> (ALLOWED_METHODS.contains(method)) &#123;</span><br><span class="line">				requestToUse = <span class="keyword">new</span> HttpMethodRequestWrapper(request, method);	<span class="comment">//将name为_method的value设置为新的请求方式</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	filterChain.doFilter(requestToUse, response);	<span class="comment">//	返回更改后的request</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这段处理代码中，只针对了POST和WebUtils.ERROR_EXCEPTION_ATTRIBUTE为空的请求进行处理，并且最终返回请求类型为_method的value，因此SpringMVC处理DELETE、PUT等附加请求时，需要遵守Method为POST且存在类型为hidden、name为_method、value为指定请求方式得隐藏域，默认格式表单如下</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;form action=<span class="string">"SpringMVCHandler/testRest/1234"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"_method"</span> value=<span class="string">"DELETE"</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">"submit"</span> value=<span class="string">"删"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在经过HiddenHttpMethodFilter过滤器处理后，系统交由controller处理，此时@RequestMapping便可成功识别请求类型，成功完成映射跳转。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping(value&#x3D;&quot;testRest&#x2F;&#123;id&#125;&quot;,method &#x3D; RequestMethod.DELETE)</span><br><span class="line">public String testDelete(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">    System.out.println(&quot;删&quot;+id);</span><br><span class="line">    return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行中存在的问题及解决方法"><a href="#运行中存在的问题及解决方法" class="headerlink" title="运行中存在的问题及解决方法"></a>运行中存在的问题及解决方法</h1><p>在SpringMVC的RESTful风格实现过程中，往往会遇到一系列问题，这里便给出一些常见问题及其解决方法。</p>
+<ul>
+<li><strong>请求兼容问题</strong>：在按照上述步骤运行时，极大可能会遇到这一问题：</li>
+</ul>
+<img src="/../image/请求不兼容问题.png">
+
+<p>  <strong>产生原因</strong>：通常这一问题是由于jsp对于DELETE、PUT请求不兼容造成的，在HiddenHttpMethodFilter过滤器将请求处理完成后交由controller处理，但在传统SpringMVC控制器映射处理后，都会返回目标文件名字符串再由配置xml中的视图解析器对返回字符串进行前后缀追加处理，在这过程中DELETE、PUT请求便由jsp处理了，因此便出现了这一问题。</p>
+<p>  <strong>解决方法</strong>：针对这一问题，只需要在控制器映射方法前增加@ResponseBody()注释表明返回的时json而不是jsp即可，使返回时跳过视图解析器，因此不会产生请求兼容错误。</p>
+<ul>
+<li><p><strong>中文乱码问题</strong>：在表单中传入中文时，可能会产生乱码问题。</p>
+<p><strong>产生原因</strong>：在发送请求时，虽然jsp页面已经设置了charset=“UTF-8”，但其实页面编码类型还是默认的ISO-8859-1，因此在接收时便会产生乱码。</p>
+<p><strong>解决方法</strong>：可以参考Java Web中利用Filter过滤器进行编码处理来解决这一问题。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    req.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">    resp.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">    System.out.println(<span class="string">"haha"</span>);</span><br><span class="line">    chain.doFilter(req, resp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但在SpringMvc中使用改该方法解决编码问题时还需要注意过滤先后问题，即如果在web.xml配置文件中HiddenHttpMethodFilter过滤器位于编码过滤器之前，则在编码过滤器处理编码之前先由HiddenHttpMethodFilter过滤器处理，这样依旧会造成乱码问题，因此需要注意配置文件中过滤器映射先后顺序，尽量将编码过滤器位于最上方，并且不要使用注释方法实现过滤器映射。</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>SpringMVC Java</tag>
       </tags>
   </entry>
 </search>
